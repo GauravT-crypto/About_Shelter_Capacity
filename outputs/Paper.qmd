@@ -1,0 +1,153 @@
+---
+title: "About Daily Shelter & Overnight Service Occupancy & Capacity"
+subtitle: ""
+author: 
+  - Gauravpreet Thind
+  - January 20, 2024 
+thanks: "Code and data are available at: LINK."
+date: today
+date-format: long
+abstract: "Homelessness in Toronto is on the rise amid the cost of housing and jobs available currently in the economy. With labor shortages affecting current residents in Ontario and refugees from Ukraine, Syria, and Afghanistan trying to seek asylum in Canada to escape the hardships of war and economic crisis from their own country. With Ontario currently making up 39% of the homelessness in all of Canada, low income families and individuals trying to find housing rely on social resources and aid to receive housing. However, with the influx of individuals trying to receive rooms and beds are creating a capacity issues with several daily shelter's and overnight services across the Provence."
+format: pdf
+number-sections: true
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(opendatatoronto)
+library(dplyr)
+library(tidyverse) # a collection of data-related packages
+library(palmerpenguins)
+library(knitr) # for kable
+```
+
+# Introduction
+
+Homelessness in Toronto is on the rise amid the cost of housing and jobs available currently in the economy. With labor shortages affecting current residents in Ontario and refugees from Ukraine, Syria, and Afghanistan trying to enter Canada to escape the hardships of war and economic crisis from their own country. With Ontario currently making up 39% of the homelessness in all of Canada, low income families and individuals trying to find housing rely on social resources and aid to receive housing. However, with the influx of individuals trying to receive rooms and beds are creating a capacity issues with several daily shelter's and overnight services across the Provence. @sec-data....
+
+# Data {#sec-data}
+
+The data collected for this paper has been retrieved from Open Data Portal through the Open Data Toronto Library (Gelfand 2022) and library(dplyr). The data was gathered and analyzed through the statistical programming language R that was used on the integrated development language R Studio (R Core Team 2023). The data set focuses on the main categories from the Daily Shelter Capacitiy of overnight service type(), capacity type(), and two measures of capicity() of both funding capacity and actual capacity.
+
+| ID  | Name                       | Location   | Sector      | Program Model | Service User Count | Capacity Type           |
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| 1   | COSTI Immigrant Services   | Toronto    | Families    | Emergency     | 650                | Motel/Hotel             |
+| 14  | City of Toronto            | North York | Mixed Adult | Emergency     | 81                 | Motel/Hotel             |
+| 112 | The Salvation Army         | Scarbrough | Men         | Emergency     | 131                | Motel/Hotel             |
+| 127 | YMCA of Greater Toronto    | Toronto    | Youth       | Transitional  | 25                 | Shelter                 |
+| 232 | Sistering: A Women's Place | Toronto    | Women       | Transitional  | 16                 | 24-Hour Women's Drop-in |
+
+: Table 1: Sample of Daily Shelter Overnight Capacity
+
+Data was taken from different organizations in Canada that help specific group of people find housing and shelter, the
+
+# Data
+
+Some of our data is of penguins (@opendatatoronto), from @Knitre.
+
+```{r}
+#| label: fig-bills
+#| fig-cap: Bills of penguins
+#| echo: false
+
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar(alpha = 0.8) +
+  scale_fill_manual(values = c("darkorange","purple","cyan4"),
+                    guide = "none") +
+  theme_minimal() +
+  facet_wrap(~species, ncol = 1) +
+  coord_flip()
+```
+
+Talk more about it.
+
+And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
+
+Talk way more about it.
+
+# Model
+
+The goal of our modelling strategy is twofold. Firstly,...
+
+Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
+
+## Model set-up
+
+Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.
+
+```{=tex}
+\begin{align} 
+y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
+\mu_i &= \alpha + \beta_i + \gamma_i\\
+\alpha &\sim \mbox{Normal}(0, 2.5) \\
+\beta &\sim \mbox{Normal}(0, 2.5) \\
+\gamma &\sim \mbox{Normal}(0, 2.5) \\
+\sigma &\sim \mbox{Exponential}(1)
+\end{align}
+```
+We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
+
+### Model justification
+
+We expect a positive relationship between the size of the wings and time spent aloft. In particular...
+
+We can use maths by including latex between dollar signs, for instance $\theta$.
+
+# Results
+
+Our results are summarized in @tbl-modelresults.
+
+# Discussion
+
+## Occupant Capacities for Overnight service types {#sec-first-point}
+
+This data set is published by the Shelter, Support & Housing Administration (SSIS) (Data 2024), through Open Data Toronto the SSIS provides all overnight service types where all occupancy is tracked through the administration.
+
+## Bed and Room Based Capacities for Shelters
+
+Housing programs provided by organizations are characterized in this second data set provided by Daily Shelter Occupancy (SSIS 2023) and are characterized by providing either a bed based or room based capacity.
+
+## Funding and Actual Capacity for Available Bed and Rooms
+
+The data set Daily Shelter Occupancy (Open Data 2023) and Shelter Management Information System (SSIS 2023) provides information about two measures of capacity of both funding and actual capacity. Funding capacity shows the number of beds or rooms in which a housing program tries to provide which is provided by the Daily Shelter Occupancy data set (Daily Shelter Occupancy 2023), which also measures the capacity to be provided. As there are various reasons for why beds or rooms may be out of service for the time being which could be because of repairs, renovation, maintenance, outbreaks or pest control. Actual capacity shows the number of beds and rooms in service and showing as available to be occupied by a family or individual, in which the reports are provided through the data set Shelter Management Information System (SISS 2023).
+
+## Weaknesses and next steps
+
+Weaknesses and next steps should also be included.
+
+\newpage
+
+\appendix
+
+# Appendix {.unnumbered}
+
+# Additional data details
+
+# Model details {#sec-model-details}
+
+## Posterior predictive check
+
+In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
+
+In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows...
+
+## Diagnostics
+
+@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
+
+@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
+
+# Bibliography
+
+RStudio Team (2020). RStudio: Integrated Development for R. RStudio, PBC, Boston, MA URL <http://www.rstudio.com/>.
+
+*Open data dataset*. City of Toronto Open Data Portal. (2023). https://open.toronto.ca/dataset/daily-shelter-overnight-service-occupancy-capacity/
+
+*Shelter, Support & Housing Administration.* Toronto Shelter & Support Services. (2023). <https://www.toronto.ca/city-government/accountability-operations-customer-service/city-administration/staff-directory-divisions-and-customer-service/toronto-shelter-support-services/>
+
+Daily Shelter Occupancy. City of Toronto Open Data Portal. (2023). <https://open.toronto.ca/dataset/daily-shelter-occupancy/>
+
+## 
